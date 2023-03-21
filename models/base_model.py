@@ -24,7 +24,7 @@ class BaseModel:
                 if key != "__class__":
                     setattr(self, key, value)
             if "id" not in kwargs:
-                self.id = str(uuid.uuid())
+                self.id = str(uuid.uuid4())
             if "created_at" not in kwargs:
                 self.created_at = datetime.now()
             if "updated_at" not in kwargs:
@@ -32,14 +32,6 @@ class BaseModel:
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
-
-        else:
-            kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
-            kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
-            del kwargs['__class__']
-            self.__dict__.update(kwargs)
 
     def __str__(self):
         """Returns a string representation of the instance"""
