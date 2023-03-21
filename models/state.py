@@ -19,10 +19,10 @@ class State(BaseModel):
         cities = relationship('City', backref='state', cascade='all, delete-orphan')    else:
             @property
             def cities(self):
-                """Greater attribute in case of file storage"""
+                """Getter attribute in case of file storage"""
                 cities = models.storage.all(City)
                 cities_in_state = []
                 for city in cities.values():
-                    if city.state.id == self.id:
+                    if city.state_id == self.id:
                         cities_in_state.append(city)
                     return cities_in_state
