@@ -87,6 +87,9 @@ def reload(self):
                                   expire_on_commit=False)
     Session = scoped_session(self.__session)
     self.__session = Session()
+def close(self):
+    """Dispose of current session if active"""
+    self.__session.remove()
 
 
 def classes(self):
